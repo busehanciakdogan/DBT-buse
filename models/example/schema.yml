@@ -33,7 +33,22 @@ sources:
             tests:
               - not_null
               - unique
+              
+      - name: ship
+        identifier: raw_gz_ship
+        description: "Information about shipping in gwz"
+
+        columns:
+          - name: shipping_fee
+            description: "Shipping fee"
+
+          - name: shipping_fee_1
+            description: "Duplicate shipping fee"
+
+          - name: ship_cost
+            description: "Cost of shipping"
 
 models:
   - name: order_details
     description: "order details including total qty and revenue"
+
