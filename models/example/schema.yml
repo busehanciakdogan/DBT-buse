@@ -1,21 +1,35 @@
-
 version: 2
 
-models:
-    - name: my_first_dbt_model
-      description: "A starter dbt model"
-      columns:
-          - name: id
-            description: "The primary key for this table"
-            tests:
-                - unique
-                - not_null
+sources:
+  - name: raw
+    schema: gz_raw_data
 
-    - name: my_second_dbt_model
-      description: "A starter dbt model"
-      columns:
-          - name: id
-            description: "The primary key for this table"
+    tables:
+      - name: sales
+        identifier: raw_gz_sales
+        description: "All sales information stored in this table"
+        tests:
+          - unique:
+              column_name: "concat(orders_id, '-', pdt_id)"
+
+        columns:
+          - name: date_date
+            description: "date of the sale"
             tests:
-                - unique
-                - not_null
+              - not_null
+
+          - name: orders_id
+            description: "unique order id of the sale"
+            tests:
+              - not_null
+
+      - name: product
+        identifier: raw_gz_product
+        description: "Information about products in gwz"
+
+        columns:
+          - name: products_id
+            description: "id of the product"
+            tests:
+              - not_null
+              - unique
