@@ -8,8 +8,10 @@ with source as (
 renamed as (
 
     select
+        orders_id,
         shipping_fee,
-        CAST(ship_cost AS FLOAT64) AS ship_cost
+        cast(logCost as float64) as logCost,
+        cast(ship_cost as float64) as ship_cost
 
     from source
 
