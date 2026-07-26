@@ -33,3 +33,7 @@ sources:
             tests:
               - not_null
               - unique
+
+models:
+  - name: order_details
+    description: "order details including total qty and revenue"
