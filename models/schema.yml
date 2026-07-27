@@ -1,0 +1,59 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: gz_raw_data
+
+    tables:
+      - name: sales
+        identifier: raw_gz_sales
+        description: "All sales information stored in this table"
+
+        tests:
+          - unique:
+              column_name: "concat(orders_id, '-', pdt_id)"
+
+        columns:
+          - name: date_date
+            tests:
+              - not_null
+
+          - name: orders_id
+            tests:
+              - not_null
+
+      - name: product
+        identifier: raw_gz_product
+
+        columns:
+          - name: products_id
+            tests:
+              - not_null
+              - unique
+
+      - name: ship
+        identifier: raw_gz_ship
+        description: "Information about shipping in gwz"
+
+        columns:
+          - name: orders_id
+            description: "Order identifier"
+            tests:
+              - not_null
+              - unique
+
+          - name: shipping_fee
+            description: "Shipping fee"
+
+          - name: shipping_fee_1
+            description: "Duplicate shipping fee"
+
+          - name: logCost
+            description: "Logistics cost"
+
+          - name: ship_cost
+            description: "Shipping cost"
+
+models:
+  - name: order_details
+    description: "order details including total qty and revenue"
